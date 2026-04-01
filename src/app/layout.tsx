@@ -12,10 +12,10 @@ export const metadata = {
   openGraph: {
     title: "OaZ",
     description: "OaZ의 소식과 프로젝트를 확인할 수 있는 공식 페이지입니다.",
-    url: "https://www.oazkorea.co.kr",
+    url: "https://www.oazkorea-demo.co.kr",
     images: [
       {
-        url: "https://www.oazkorea.co.kr/oaz_w_bg.png",
+        url: "https://www.oazkorea-demo.co.kr/oaz_w_bg.png",
         width: 1200,
         height: 630,
         alt: "OaZ 대표 이미지",
