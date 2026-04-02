@@ -111,23 +111,23 @@ export default function Navigation() {
       subItems: [
         { name: "Who We Are", href: "/about/who-we-are" },
         { name: "Notice", href: "/about/notice" },
-        { name: "Executive Team", href: "/about/executive-team" }
+        // { name: "Executive Team", href: "/about/executive-team" }
       ]
     },
     {
       name: "Studies",
       href: "/studies/records",
       subItems: [
-        { name: "Overview", href: "/studies/overview" },
-        { name: "Study Records***", href: "/studies/records" },
-        { name: "Schedule", href: "/studies/schedule" },
+        // { name: "Overview", href: "/studies/overview" },
+        { name: "Study Records", href: "/studies/records" },
+        { name: "Schedule" },
       ]
     },
     {
       name: "Projects",
       href: "/projects/archives",
       subItems: [
-        { name: "Overview", href: "/projects/overview" },
+        // { name: "Overview", href: "/projects/overview" },
         { name: "Project Archives", href: "/projects/archives" },
       ]
     },
@@ -140,10 +140,10 @@ export default function Navigation() {
     },
     {
       name: "Blog",
-      href: "/blog/members-tech-blog",
+      href: "/blog/band",
       subItems: [
-        { name: "Members' Tech Blog", href: "/blog/members-tech-blog" },
-        { name: "OAZ Band", href: "/blog/band" }
+        { name: "OAZ Band", href: "/blog/band" },
+        { name: "Members' Tech Blog", href: "/blog/members-tech-blog" }
       ]
     },
     {
@@ -155,12 +155,17 @@ export default function Navigation() {
     },
     {
       name: "Alumni",
-      href: "/alumni/welcome",
+      // href: "/alumni/welcome",
+      href: "/.",
       subItems: [
-        { name: "Welcome Message", href: "/alumni/welcome" },
-        { name: "Alumni News", href: "/alumni/news" },
-        { name: "Condolences", href: "/alumni/events" },
-        { name: "Former Executives", href: "/alumni/former-execs" },
+        // { name: "Welcome Message", href: "/alumni/welcome" },
+        // { name: "Alumni News", href: "/alumni/news" },
+        // { name: "Condolences", href: "/alumni/events" },
+        // { name: "Former Executives", href: "/alumni/former-execs" },
+        { name: "Welcome Message" },
+        { name: "Alumni News" },
+        { name: "Condolences" },
+        { name: "Former Executives"},
       ]
     }
   ];
@@ -213,16 +218,29 @@ export default function Navigation() {
                 {/* 조건부 렌더링*/}
                 {item.subItems && hoveredMenu === item.name && (
                   <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                    {item.subItems.map((subItem) => 
-                     subItem.name === "Overview" ? null :(
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
+                    {item.subItems.map((subItem) =>
+                      subItem.href ? (
+                        <Link
+                          key={subItem.name}
+                          href={subItem.href}
+                          className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        >
+                          {subItem.name}
+                        </Link>
+                      ) : (
+                          <a
+                            key={subItem.name}
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }}
+                            className="block px-4 py-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900"
+                          >
+                            {subItem.name}
+                          </a>
+                        )
+                    )}
                   </div>
                 )}
               </div>
@@ -235,7 +253,7 @@ export default function Navigation() {
             <Link href="/signin">
               <Button variant="ghost" className="flex items-center hover:bg-gray-100 text-black px-3 py-2 rounded-md">
                 <Github className="w-5 h-5" />
-                <span>Sign in</span>
+                <span>Sign up</span>
               </Button>
             </Link>
 
@@ -299,26 +317,29 @@ export default function Navigation() {
                           className="overflow-hidden ml-4 mt-1 space-y-2"
                         >
                           {item.subItems.map((subItem) =>
-                           subItem.name === "Overview" ? null : (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block text-gray-500 hover:text-gray-800 text-sm"
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
+                            subItem.href ? (
+                              <Link
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block text-gray-500 hover:text-gray-800 text-sm"
+                              >
+                                {subItem.name}
+                              </Link>
+                            ) : (
+                              <span
+                                key={subItem.name}
+                                className="block text-gray-400 cursor-not-allowed text-sm"
+                              >
+                                {subItem.name}
+                              </span>
+                            )
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
                   )}
                 </div>
               ))}
-              <div className="pt-4 border-t border-gray-200">
-                <Button className="w-full bg-black hover:bg-gray-800 text-white">
-                  Get Started
-                </Button>
-              </div>
             </div>
           </motion.div>
         )}
