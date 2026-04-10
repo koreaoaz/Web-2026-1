@@ -129,7 +129,7 @@ export default function WhoWeArePage() {
                   {/* ✅ Navigation 기준: /studies/overview */}
                   <Button
                     asChild
-                    size="sm"
+                    size="huge"
                     variant="secondary"
                     className="border border-zinc-700/70 bg-zinc-800 text-zinc-100"
                   >
