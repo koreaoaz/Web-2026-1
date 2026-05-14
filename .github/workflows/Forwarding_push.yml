@@ -19,7 +19,7 @@ jobs:
     - name: Add meaningless newline
       run: |
         git config user.name "koreaoaz"
-        git config user.email "koreaoaz@gmail.com"
+        git config user.email "yung.ym.lee@gmail.com"
         git pull --rebase
         echo "" >> Forwarding_patch.txt
         git add Forwarding_patch.txt
