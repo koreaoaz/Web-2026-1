@@ -21,7 +21,7 @@ export default function Navigation() {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: 'https://www.oazkorea.co.kr/login_callback',
+        redirectTo: 'https://www.oazkorea-demo.co.kr/login_callback',
       },
     });
   };
