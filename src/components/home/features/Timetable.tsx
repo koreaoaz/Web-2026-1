@@ -35,63 +35,53 @@ export const TimetableDemo = () => {
     loadStudies()
   }, [])
 
-const loadStudies = async () => {
-  setIsLoading(true)
-  setError(null)
+  const loadStudies = async () => {
+    setIsLoading(true)
+    setError(null)
 
-  try {
-    const { data, error } = await supabase
-      .from("editor_3_study_timetable")
-      .select("*")
-      .order("start_time")
+    try {
+      const { data, error } = await supabase
+        .from("editor_3_study_timetable")
+        .select("*")
+        .order("start_time")
 
-    if (error) {
-      setError(`Database error: ${error.message}`)
-      setStudies([])
-      return
-    }
+      if (error) {
+        setError(`Database error: ${error.message}`)
+        setStudies([])
+        return
+      }
 
-    if (!data || data.length === 0) {
-      setStudies([])
-      return
-    }
+      if (!data || data.length === 0) {
+        setStudies([])
+        return
+      }
 
-    const validStudies: Study[] = []
+      const validStudies: Study[] = []
 
-    data.forEach((item: any, index: number) => {
-      if (!item.start_time || !item.end_time || !item.study_name) return
+      data.forEach((item: any, index: number) => {
+        if (!item.start_time || !item.end_time || !item.study_name) return
 
-      const startParts = item.start_time.split(" ")
-      const endParts = item.end_time.split(" ")
+        const startParts = item.start_time.split(" ")
+        const endParts = item.end_time.split(" ")
 
-      if (startParts.length < 2 || endParts.length < 2) return
+        if (startParts.length < 2 || endParts.length < 2) return
 
-      const day = startParts[0]
-      const startTime = startParts[1]
-      const endTime = endParts[1]
+        const day = startParts[0]
+        const startTime = startParts[1]
+        const endTime = endParts[1]
 
-      validStudies.push({
-        id: item.id?.toString() || `temp-${index}`,
-        name: item.study_name,
-        leader: item.leader || "Unknown",
-        color: item.color || "#6b7280",
-        day,
-        startTime,
-        endTime,
-        startSlot: timeToSlot(startTime),
-        endSlot: timeToSlot(endTime),
+        validStudies.push({
+          id: item.id?.toString() || `temp-${index}`,
+          name: item.study_name,
+          leader: item.leader || "Unknown",
+          color: item.color || "#6b7280",
+          day,
+          startTime,
+          endTime,
+          startSlot: timeToSlot(startTime),
+          endSlot: timeToSlot(endTime),
+        })
       })
-    })
-
-    setStudies(validStudies)
-  } catch (err) {
-    console.error(err)
-    setError("Failed to load studies")
-    setStudies([])
-  } finally {
-    setIsLoading(false)
-  }
-}
 
       setStudies(validStudies)
     } catch (err) {
